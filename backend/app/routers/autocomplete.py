@@ -1,10 +1,10 @@
 from fastapi import APIRouter
-from ..schemas import AutocompleteRequest, AutocompleteResponse
+from ..schemas import autocomprequest, autocompresponse
 
 router = APIRouter(prefix="/autocomplete", tags=["autocomplete"])
 
-@router.post("", response_model=AutocompleteResponse)
-def autocomplete(req: AutocompleteRequest):
+@router.post("", response_model=autocompresponse)
+def autocomplete(req: autocomprequest):
     tail = req.code[:req.cursorPosition].split()[-1] if req.cursorPosition > 0 and req.code.strip() else ""
     if tail.endswith("import"):
         suggestion = " os\n"
