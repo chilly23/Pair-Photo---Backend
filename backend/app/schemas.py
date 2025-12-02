@@ -1,17 +1,17 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class RoomCreate(BaseModel):
+class roomcreate(BaseModel):
     language: Optional[str] = "python"
 
-class RoomOut(BaseModel):
+class roomout(BaseModel):
     roomId: str
 
-class AutocompleteRequest(BaseModel):
+class autocomprequest(BaseModel):
     code: str
     cursorPosition: int
     language: str = "python"
 
-class AutocompleteResponse(BaseModel):
+class autocompresponse(BaseModel):
     suggestion: str
     cursor: int
