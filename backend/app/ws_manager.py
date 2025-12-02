@@ -2,10 +2,9 @@ from typing import Dict, List
 from fastapi import WebSocket
 import asyncio
 
-class ConnectionManager:
+class connectionmanager:
     def __init__(self):
         self.active: Dict[str, List[WebSocket]] = {}
-        # simple lock for safety across threads/tasks
         self._lock = asyncio.Lock()
 
     async def connect(self, room: str, websocket: WebSocket):
@@ -22,7 +21,6 @@ class ConnectionManager:
                 self.active.pop(room, None)
 
     async def broadcast(self, room: str, message: dict, sender: WebSocket = None):
-        # Copy connections to avoid mutation during iteration
         async with self._lock:
             conns = list(self.active.get(room, []))
         for ws in conns:
